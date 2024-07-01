@@ -9,15 +9,13 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-// TextField: Campo de entrada de texto que muestra el título de la tarea.
-// IconButton: Botones para completar (CheckCircleIcon), editar (EditIcon) y eliminar (DeleteIcon) una tarea.
-// handleDelete: Función para eliminar una tarea de la lista.
-// handleComplete: Función para marcar una tarea como completada.
-// handleEdit: (Pendiente) Función para editar una tarea.
-const TodoList = ({ todos, setTodos }) => {
+
+const TodoList = ({ todos, setTodos, setEditTodo }) => {
 	const handleDelete = (id) => {
+		console.log(`Deleting todo with id: ${id}`);
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
+
 	const handleComplete = (id) => {
 		console.log(`Completing todo with id: ${id}`);
 		setTodos(
@@ -33,7 +31,9 @@ const TodoList = ({ todos, setTodos }) => {
 	};
 
 	const handleEdit = (id) => {
-		// Lógica para editar el todo
+		console.log(`Editing todo with id: ${id}`);
+		const findTodo = todos.find((todo) => todo.id === id);
+		setEditTodo(findTodo);
 	};
 
 	return (
@@ -65,4 +65,5 @@ const TodoList = ({ todos, setTodos }) => {
 		</List>
 	);
 };
+
 export default TodoList;

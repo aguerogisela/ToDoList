@@ -8,6 +8,7 @@ import "./App.css";
 const App = () => {
 	const [input, setInput] = useState("");
 	const [todos, setTodos] = useState([]);
+	const [editTodo, setEditTodo] = useState(null);
 
 	return (
 		<Container maxWidth="sm">
@@ -18,8 +19,10 @@ const App = () => {
 					setInput={setInput}
 					todos={todos}
 					setTodos={setTodos}
+					editTodo={editTodo}
+					setEditTodo={setEditTodo}
 				/>
-				<TodoList todos={todos} setTodos={setTodos} />
+				<TodoList todos={todos} setTodos={setTodos} setEditTodo={setEditTodo} />
 			</Paper>
 		</Container>
 	);

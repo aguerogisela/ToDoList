@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
@@ -34,25 +34,29 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 	};
 
 	return (
-		<form onSubmit={onFormSubmit}>
-			<TextField
-				type="text"
-				placeholder="Enter a todo"
-				variant="outlined"
-				value={input}
-				required
-				onChange={onInputChange}
-				fullWidth
-			/>
-			<Button
-				variant="contained"
-				color="primary"
-				type="submit"
-				style={{ marginTop: "10px" }}
-				fullWidth
-			>
-				{editTodo ? "OK" : "Add"}
-			</Button>
+		<form onSubmit={onFormSubmit} className="form">
+			<Box display="flex" alignItems="center" width="100%" sx={{ mb: 2 }}>
+				<TextField
+					type="text"
+					placeholder="Enter a todo"
+					variant="outlined"
+					value={input}
+					required
+					onChange={onInputChange}
+					fullWidth
+					className="todo-input"
+					margin="normal"
+					sx={{ m: 1 }}
+				/>
+				<Button
+					variant="contained"
+					color="primary"
+					type="submit"
+					className="add-button"
+				>
+					{editTodo ? "OK" : "Add"}
+				</Button>
+			</Box>
 		</form>
 	);
 };

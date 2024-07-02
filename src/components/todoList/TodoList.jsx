@@ -1,16 +1,27 @@
 import React from "react";
 import {
-	TextField,
+	Typography,
 	IconButton,
 	List,
 	ListItem,
 	ListItemSecondaryAction,
+	Select,
+	MenuItem,
+	FormControl,
+	InputLabel,
+	Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const TodoList = ({ todos, setTodos, setEditTodo }) => {
+const TodoList = ({
+	todos,
+	setTodos,
+	setEditTodo,
+	filter,
+	handleFilterChange,
+}) => {
 	const handleDelete = (id) => {
 		console.log(`Deleting todo with id: ${id}`);
 		setTodos(todos.filter((todo) => todo.id !== id));
@@ -37,32 +48,68 @@ const TodoList = ({ todos, setTodos, setEditTodo }) => {
 	};
 
 	return (
-		<List>
-			{todos.map((todo) => (
-				<ListItem
-					key={todo.id}
-					style={{ textDecoration: todo.completed ? "line-through" : "none" }}
-				>
-					<TextField
-						value={todo.title}
-						variant="outlined"
-						onChange={(event) => event.preventDefault()}
-						fullWidth
-					/>
-					<ListItemSecondaryAction>
-						<IconButton edge="end" onClick={() => handleComplete(todo.id)}>
-							<CheckCircleIcon color={todo.completed ? "primary" : "default"} />
-						</IconButton>
-						<IconButton edge="end" onClick={() => handleEdit(todo.id)}>
-							<EditIcon />
-						</IconButton>
-						<IconButton edge="end" onClick={() => handleDelete(todo.id)}>
-							<DeleteIcon />
-						</IconButton>
-					</ListItemSecondaryAction>
-				</ListItem>
-			))}
-		</List>
+		<>
+			<Box
+				display="flex"
+				justifyContent="space-between"
+				alignItems="center"
+				marginBottom="20px"
+			>
+				<Typography variant="h6">Tarea</Typography>
+				<FormControl variant="outlined" size="small">
+					<InputLabel id="filter-label">Filter</InputLabel>
+					<Select
+						labelId="filter-label"
+						value={filter}
+						onChange={handleFilterChange}
+						label="Filter"
+						className="filter-select"
+					>
+						<MenuItem value="all">Todas</MenuItem>
+						<MenuItem value="completed">Completado</MenuItem>
+						<MenuItem value="incomplete">Incompleto</MenuItem>
+					</Select>
+				</FormControl>
+			</Box>
+			<List>
+				{todos.map((todo) => (
+					<ListItem
+						key={todo.id}
+						className="list-item"
+						style={{ textDecoration: todo.completed ? "line-through" : "none" }}
+					>
+						<Typography variant="body1" style={{ flexGrow: 1 }}>
+							{todo.title}
+						</Typography>
+						<ListItemSecondaryAction>
+							<IconButton
+								edge="end"
+								onClick={() => handleComplete(todo.id)}
+								size="small"
+							>
+								<CheckCircleIcon
+									color={todo.completed ? "primary" : "default"}
+								/>
+							</IconButton>
+							<IconButton
+								edge="end"
+								onClick={() => handleEdit(todo.id)}
+								size="small"
+							>
+								<EditIcon color="action" />
+							</IconButton>
+							<IconButton
+								edge="end"
+								onClick={() => handleDelete(todo.id)}
+								size="small"
+							>
+								<DeleteIcon color="error" />
+							</IconButton>
+						</ListItemSecondaryAction>
+					</ListItem>
+				))}
+			</List>
+		</>
 	);
 };
 

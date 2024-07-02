@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Typography,
 	IconButton,
@@ -10,6 +10,8 @@ import {
 	FormControl,
 	InputLabel,
 	Box,
+	Modal,
+	Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -22,27 +24,37 @@ const TodoList = ({
 	filter,
 	handleFilterChange,
 }) => {
+	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [todoToDelete, setTodoToDelete] = useState(null);
+
 	const handleDelete = (id) => {
-		console.log(`Deleting todo with id: ${id}`);
-		setTodos(todos.filter((todo) => todo.id !== id));
+		setTodoToDelete(id);
+		setDeleteModalOpen(true);
+	};
+
+	const handleConfirmDelete = () => {
+		if (todoToDelete) {
+			setTodos(todos.filter((todo) => todo.id !== todoToDelete));
+			setDeleteModalOpen(false);
+		}
+	};
+
+	const handleCancelDelete = () => {
+		setDeleteModalOpen(false);
 	};
 
 	const handleComplete = (id) => {
-		console.log(`Completing todo with id: ${id}`);
 		setTodos(
-			todos
-				.map((item) => {
-					if (item.id === id) {
-						return { ...item, completed: !item.completed };
-					}
-					return item;
-				})
-				.sort((a, b) => a.completed - b.completed)
+			todos.map((item) => {
+				if (item.id === id) {
+					return { ...item, completed: !item.completed };
+				}
+				return item;
+			})
 		);
 	};
 
 	const handleEdit = (id) => {
-		console.log(`Editing todo with id: ${id}`);
 		const findTodo = todos.find((todo) => todo.id === id);
 		setEditTodo(findTodo);
 	};
@@ -76,7 +88,9 @@ const TodoList = ({
 					<ListItem
 						key={todo.id}
 						className="list-item"
-						style={{ textDecoration: todo.completed ? "line-through" : "none" }}
+						style={{
+							textDecoration: todo.completed ? "line-through" : "none",
+						}}
 					>
 						<Typography variant="body1" style={{ flexGrow: 1 }}>
 							{todo.title}
@@ -109,6 +123,47 @@ const TodoList = ({
 					</ListItem>
 				))}
 			</List>
+			<Modal
+				open={deleteModalOpen}
+				onClose={handleCancelDelete}
+				aria-labelledby="modal-modal-title"
+				aria-describedby="modal-modal-description"
+			>
+				<Box
+					sx={{
+						position: "absolute",
+						top: "50%",
+						left: "50%",
+						transform: "translate(-50%, -50%)",
+						width: 400,
+						bgcolor: "background.paper",
+						boxShadow: 24,
+						p: 4,
+						textAlign: "center",
+					}}
+				>
+					<Typography id="modal-modal-title" variant="h6" component="h2">
+						¿Estás seguro que deseas eliminar esta tarea?
+					</Typography>
+					<Box sx={{ mt: 2 }}>
+						<Button
+							onClick={handleConfirmDelete}
+							variant="contained"
+							color="error"
+						>
+							Eliminar
+						</Button>
+						<Button
+							onClick={handleCancelDelete}
+							variant="contained"
+							color="primary"
+							sx={{ ml: 2 }}
+						>
+							Cancelar
+						</Button>
+					</Box>
+				</Box>
+			</Modal>
 		</>
 	);
 };

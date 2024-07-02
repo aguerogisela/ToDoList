@@ -2,6 +2,8 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: rgb(178, 231, 231);
+	color: black;
 }
 
 .app-container {

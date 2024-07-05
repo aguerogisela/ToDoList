@@ -1,8 +1,43 @@
-# React + Vite
+# 📝 To-Do List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![To-Do List](./imagenes/to-do-list.png)
 
-Currently, two official plugins are available:
+Una aplicación de lista de tareas simple y funcional construida con React y Material-UI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎥 Video Demo
+
+Puedes descargar y ver el video demo [aquí](./imagenes/Grabación%20de%20pantalla%202024-07-05%20200345.mp4).
+
+## 🚀 Características
+
+- **Agregar Tareas**: Permite agregar nuevas tareas a la lista.
+- **Editar Tareas**: Permite modificar las tareas existentes.
+- **Eliminar Tareas**: Permite eliminar tareas de la lista.
+- **Completar Tareas**: Permite marcar tareas como completadas.
+- **Filtrar Tareas**: Permite filtrar las tareas para mostrar todas, solo las completadas o solo las incompletas.
+- **Persistencia de Datos**: Las tareas se almacenan en `localStorage`, por lo que persisten entre recargas de página.
+- **Diseño Responsive**: La aplicación es responsiva y se ve bien en dispositivos móviles y tabletas, tanto en modo retrato como apaisado.
+
+## 🔧 Tecnologías Utilizadas
+
+- **React**: Biblioteca de JavaScript para construir interfaces de usuario.
+- **Material-UI**: Biblioteca de componentes de interfaz de usuario basada en Material Design.
+- **react-hook-form**: Biblioteca para manejar formularios en React.
+- **uuid**: Biblioteca para generar identificadores únicos universales (UUID).
+
+## 📂 Estructura del Proyecto
+
+```plaintext
+src/
+|-- components/
+|   |-- header/
+|   |   |-- Header.jsx
+|   |-- form/
+|   |   |-- Form.jsx
+|   |-- todoList/
+|   |   |-- TodoList.jsx
+|   |   |-- Filter.jsx
+|   |   |-- TodoItem.jsx
+|   |   |-- DeleteModal.jsx
+|-- App.jsx
+|-- App.css

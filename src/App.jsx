@@ -1,8 +1,9 @@
+// App.js
 import React, { useState, useEffect } from "react";
 import Header from "./components/header/Header";
 import Form from "./components/form/Form";
 import TodoList from "./components/todoList/TodoList";
-import { Container, Paper, Grid, Box } from "@mui/material";
+import { Container, Paper, Box } from "@mui/material";
 import "./App.css";
 
 const App = () => {
